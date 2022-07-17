@@ -9,5 +9,6 @@ const bool ResourceManager::load()
 {
 	return
 		imageMap[ImageId::cursor].loadFromFile("Data/Images/Cursor.png") &&
-		textureMap[TextureId::player].loadFromFile("Data/Textures/Player.png");
+		textureMap[TextureId::player].loadFromFile("Data/Textures/Player.png") &&
+		textureMap[TextureId::tile].loadFromFile("Data/Textures/Tile.png");
 }

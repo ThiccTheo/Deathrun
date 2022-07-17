@@ -5,7 +5,7 @@
 
 #include "CommonSFML.hpp"
 
-enum class TextureId { player, count };
+enum class TextureId { player, tile, count };
 enum class ImageId { cursor, count };
 enum class SoundBufferId { count };
 enum class FontId { count };

@@ -2,6 +2,7 @@
 #include "../../Scene/Scene.hpp"
 #include "../../Entity/Player/Player.hpp"
 #include "../../Entity/Particle/Particle.hpp"
+#include "../../Entity/Tile/Tile.hpp"
 
 GameState::GameState()
 {
@@ -10,6 +11,14 @@ GameState::GameState()
 
 	Player player(sf::Vector2i(10, 10));
 	Player::player = player;
+
+	for (int i = 0; i < 100; i++)
+	{
+		for (int j = 0; j < 100; j++)
+		{
+			Tile::tiles.emplace_back(sf::Vector2i(j, i));
+		}
+	}
 }
 
 GameState::~GameState() = default;
@@ -36,6 +45,7 @@ void GameState::run()
 
 void GameState::update(const float deltaTime, const sf::Event& e)
 {
+	Tile::update(deltaTime);
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);
 
@@ -44,6 +54,7 @@ void GameState::update(const float deltaTime, const sf::Event& e)
 
 void GameState::draw()
 {
+	Tile::draw();
 	Particle::draw();
 	Player::draw();
 }
