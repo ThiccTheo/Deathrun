@@ -18,21 +18,21 @@ void Logger::print(const LogLevel logLevel, std::string message, const std::sour
 {
 	switch (logLevel)
 	{
-		case LogLevel::debug:
-			message.insert(0, "[Debug] ");
-			break;
-		case LogLevel::info:
-			message.insert(0, "[Info] ");
-			break;
-		case LogLevel::warning:
-			message.insert(0, "[Warning] ");
-			break;
-		case LogLevel::error:
-			message.insert(0, "[Error] ");
-			break;
-		case LogLevel::critical:
-			message.insert(0, "[Critical] ");
-			break;
+	case LogLevel::debug:
+		message.insert(0, "[Debug] ");
+		break;
+	case LogLevel::info:
+		message.insert(0, "[Info] ");
+		break;
+	case LogLevel::warning:
+		message.insert(0, "[Warning] ");
+		break;
+	case LogLevel::error:
+		message.insert(0, "[Error] ");
+		break;
+	case LogLevel::critical:
+		message.insert(0, "[Critical] ");
+		break;
 	}
 
 	message += std::format(" [{}:{}:{}]\n", strrchr(location.file_name(), '\\') ? strrchr(location.file_name(), '\\') + 1 : location.file_name(), location.line(), location.column());

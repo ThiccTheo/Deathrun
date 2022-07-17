@@ -17,7 +17,7 @@ Particle::Particle(const sf::Vector2i& indices)
 	color = spawnColor;
 	deathColor = sf::Color(0, 0, 255, 0);
 	maxLifetime = sf::seconds(1.5f);
-	lifetime = maxLifetime;
+	timer.restart();
 }
 
 Particle::~Particle() = default;
@@ -26,11 +26,11 @@ void Particle::update(const float deltaTime)
 {
 	for (Particle& particle : particles)
 	{
-		particle.lifetime -= sf::seconds(deltaTime);
-		particle.color.r = static_cast<int>(std::lerp(static_cast<float>(particle.color.r), static_cast<float>(particle.deathColor.r),  deltaTime));
-		particle.color.g = static_cast<int>(std::lerp(static_cast<float>(particle.color.g), static_cast<float>(particle.deathColor.g), deltaTime));
-		particle.color.b = static_cast<int>(std::lerp(static_cast<float>(particle.color.b), static_cast<float>(particle.deathColor.b), deltaTime));
-		particle.color.a = static_cast<int>(particle.spawnColor.a * (particle.lifetime.asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.r = static_cast<int>(std::lerp(static_cast<float>(particle.color.r), static_cast<float>(particle.deathColor.r),  particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.g = static_cast<int>(std::lerp(static_cast<float>(particle.color.g), static_cast<float>(particle.deathColor.g), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.b = static_cast<int>(std::lerp(static_cast<float>(particle.color.b), static_cast<float>(particle.deathColor.b), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.a = static_cast<int>(std::lerp(static_cast<float>(particle.color.a), static_cast<float>(particle.deathColor.a), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		//particle.color.a = static_cast<int>(particle.spawnColor.a * (particle.lifetime.asSeconds() / particle.maxLifetime.asSeconds()));
 		particle.body.rotate(particle.angle * deltaTime);
 		particle.body.setSize(sf::Vector2f(particle.body.getSize().x + 0.5f, particle.body.getSize().y + 0.5f));
 		particle.body.setOrigin(particle.body.getSize().x / 2.f, particle.body.getSize().x / 2.f);
@@ -39,7 +39,7 @@ void Particle::update(const float deltaTime)
 	std::erase_if(particles,
 		[](const Particle& particle) -> bool
 		{
-			return particle.lifetime.asSeconds() <= 0.f;
+			return particle.timer.getElapsedTime().asSeconds() >= particle.maxLifetime.asSeconds();
 		});
 }
 

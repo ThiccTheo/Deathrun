@@ -25,8 +25,6 @@ void GameState::run()
 	sf::Clock deltaClock;
 	float deltaTime;
 
-	Logger::error("get out of here!");
-
 	while (Scene::window.isOpen())
 	{
 		const sf::Event& e{ eventHandler() };

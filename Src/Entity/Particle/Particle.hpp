@@ -17,7 +17,7 @@ public:
 	static void draw();
 private:
 	static sf::VertexArray vertexArray;
-	sf::Time lifetime;
+	sf::Clock timer;
 	sf::Color color;
 	sf::Color spawnColor;
 	sf::Color deathColor;
