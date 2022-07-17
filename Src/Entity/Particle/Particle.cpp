@@ -11,7 +11,7 @@ sf::VertexArray Particle::vertexArray;
 Particle::Particle(const sf::Vector2i& indices) 
 	: Entity{ indices, sf::Vector2f(4.f, 4.f) }
 {
-	angle = static_cast<float>(rangeRandom(-30, 30));
+	angle = rangeRandom(-30.f, 30.f);
 	lifetime = sf::seconds(10);
 	spawnColor = sf::Color(255, 0, 0, 255);
 	color = spawnColor;

@@ -8,7 +8,6 @@ int main()
 {
 	if (ResourceManager::load())
 	{
-		srand(static_cast<unsigned int>(time(NULL)));
 		Scene::init();
 		StateManager::addState(StateId::gameState);
 		ImGui::SFML::Shutdown(Scene::window);
