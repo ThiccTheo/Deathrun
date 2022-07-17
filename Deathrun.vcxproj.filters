@@ -442,7 +442,10 @@
     <None Include="Include\SFML\System\Vector3.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="Tools\RangeRandom\RangeRandom.inl">
+    <None Include="Tools\RangeRandom\RangeRandom.hpp">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="Tools\Logger\Logger.hpp">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

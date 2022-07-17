@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "Player.hpp"
 #include "../../Scene/Scene.hpp"
 #include "../../ResourceManager/ResourceManager.hpp"
@@ -5,8 +7,6 @@
 
 Player Player::player;
 sf::VertexArray Player::vertexArray;
-const float Player::gravity{ 9.8f };
-const float Player::friction{ 12.f };
 
 Player::Player() = default;
 
@@ -15,13 +15,17 @@ Player::Player(const sf::Vector2i& indices)
 {
 	velocity = sf::Vector2f(0.f, 0.f);
 	isGrounded = false;
+	terminalVelocity = sf::Vector2f(100.f, 1000.f);
+	gravity = 100.f;
+	friction = 12.f;
+	movementOffset = sf::Vector2f(50.f, 100.f);
 };
 
 Player::~Player() = default;
 
 void Player::update(const float deltaTime, const sf::Event& e)
 {
-	player.velocity.y += gravity * deltaTime;
+	player.velocity.y += player.gravity * deltaTime;
 
 	switch (e.type)
 	{
@@ -30,7 +34,7 @@ void Player::update(const float deltaTime, const sf::Event& e)
 			{
 				if (player.isGrounded)
 				{
-					player.velocity.y -= 10.f;
+					player.velocity.y -= player.movementOffset.y;
 				}
 			}
 			break;
@@ -39,17 +43,17 @@ void Player::update(const float deltaTime, const sf::Event& e)
 	if (Scene::isFocused && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		player.body.setScale(-1.f, 1.f);
-		player.velocity.x -= 50.f * deltaTime;
+		player.velocity.x -= player.movementOffset.x;
 	}
 	if (Scene::isFocused && sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		player.body.setScale(1.f, 1.f);
-		player.velocity.x += 50.f * deltaTime;
+		player.velocity.x += player.movementOffset.x;
 	}
 
 	if (player.velocity.x > 0.f)
 	{
-		player.velocity.x -= friction * deltaTime;
+		player.velocity.x -= player.friction;
 		if (player.velocity.x < 0.f)
 		{
 			player.velocity.x = 0.f;
@@ -57,46 +61,49 @@ void Player::update(const float deltaTime, const sf::Event& e)
 	}
 	else if (player.velocity.x < 0.f)
 	{
-		player.velocity.x += friction * deltaTime;
+		player.velocity.x += player.friction;
 		if (player.velocity.x > 0.f)
 		{
 			player.velocity.x = 0.f;
 		}
 	}
 
+	player.velocity.x = std::clamp(player.velocity.x, -player.terminalVelocity.x, player.terminalVelocity.x);
+	player.velocity.y = std::clamp(player.velocity.y, -player.terminalVelocity.y, player.terminalVelocity.y);
+
 	const Entity* collider{ nullptr };
 
-	player.body.move(player.velocity.x, 0.f);
+	player.body.move(player.velocity.x * deltaTime, 0.f);
 	collider = player.collisionHandler(EntityType::tile);
 	if (collider != nullptr)
 	{
 		if (player.velocity.x > 0.f)
 		{
 			player.body.setPosition(collider->body.getPosition().x - collider->body.getSize().x / 2.f - player.body.getSize().x / 2.f, player.body.getPosition().y);
-			player.velocity.x = 0.f;
 		}
 		else if (player.velocity.x < 0.f)
 		{
 			player.body.setPosition(collider->body.getPosition().x + collider->body.getSize().x / 2.f + player.body.getSize().x / 2.f, player.body.getPosition().y);
-			player.velocity.x = 0.f;
 		}
+
+		player.velocity.x = 0.f;
 	}
 
-	player.body.move(0.f, player.velocity.y);
+	player.body.move(0.f, player.velocity.y * deltaTime);
 	collider = player.collisionHandler(EntityType::tile);
 	if (collider != nullptr)
 	{
 		if (player.velocity.y > 0.f)
 		{
 			player.body.setPosition(player.body.getPosition().x, collider->body.getPosition().y - collider->body.getSize().y / 2.f - player.body.getSize().y / 2.f);
-			player.velocity.y = 0.f;
 			player.isGrounded = true;
 		}
 		else if (player.velocity.y < 0.f)
 		{
 			player.body.setPosition(player.body.getPosition().x, collider->body.getPosition().y + collider->body.getSize().y / 2.f + player.body.getSize().y / 2.f);
-			player.velocity.y = 0.f;
 		}
+
+		player.velocity.y = 0.f;
 	}
 	else
 	{
@@ -104,7 +111,7 @@ void Player::update(const float deltaTime, const sf::Event& e)
 	}
 
 	if(player.velocity.x != 0.f || player.velocity.y != 0.f)
-	Particle::particles.emplace_back(sf::Vector2i(player.body.getPosition().x / 4.f, player.body.getPosition().y / 4.f));
+	Particle::particles.emplace_back(sf::Vector2i(static_cast<int>(player.body.getPosition().x / 4.f), static_cast<int>(player.body.getPosition().y / 4.f)));
 }
 
 void Player::draw()

@@ -22,5 +22,6 @@ private:
 	sf::Color spawnColor;
 	sf::Color deathColor;
 	float angle;
+	sf::Time maxLifetime;
 };
 

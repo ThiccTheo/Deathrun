@@ -19,8 +19,11 @@ public:
 private:
 	static sf::VertexArray vertexArray;
 	sf::Vector2f velocity;
-	static const float friction;
-	static const float gravity;
+	float friction;
+	float gravity;
 	bool isGrounded;
+	sf::Vector2f terminalVelocity;
+	sf::Vector2f movementOffset;
+	
 };
 

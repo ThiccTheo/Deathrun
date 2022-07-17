@@ -3,6 +3,8 @@
 #include "GameState.hpp"
 #include "../../Scene/Scene.hpp"
 #include "../../ResourceManager/ResourceManager.hpp"
+#include "../../../Tools/ScopedTimer/ScopedTimer.hpp"
+#include "../../../Tools/Logger/Logger.hpp"
 #include "../../Entity/Player/Player.hpp"
 #include "../../Entity/Particle/Particle.hpp"
 #include "../../Entity/Tile/Tile.hpp"
@@ -46,8 +48,8 @@ void GameState::update(const float deltaTime, const sf::Event& e)
 
 	camera.setCenter
 	(
-		std::lerp(camera.getCenter().x, Player::player.body.getPosition().x, deltaTime),
-		std::lerp(camera.getCenter().y, Player::player.body.getPosition().y, deltaTime)
+		std::lerp(camera.getCenter().x, Player::player.body.getPosition().x, 5 * deltaTime),
+		std::lerp(camera.getCenter().y, Player::player.body.getPosition().y, 5 * deltaTime)
 	);
 }
 
