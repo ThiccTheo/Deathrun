@@ -18,5 +18,9 @@ public:
 	static void draw();
 private:
 	static sf::VertexArray vertexArray;
+	sf::Vector2f velocity;
+	static const float friction;
+	static const float gravity;
+	bool isGrounded;
 };
 

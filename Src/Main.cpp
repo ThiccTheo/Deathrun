@@ -9,7 +9,7 @@ int main()
 	if (ResourceManager::load())
 	{
 		Scene::init();
-		StateManager::addState(StateId::gameState);
+		StateManager::addState(StateType::gameState);
 		ImGui::SFML::Shutdown(Scene::window);
 		return EXIT_SUCCESS;
 	}

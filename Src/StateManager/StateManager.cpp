@@ -36,11 +36,11 @@ const sf::Event StateManager::eventHandler()
 	return {};
 }
 
-void StateManager::addState(const StateId stateId)
+void StateManager::addState(const StateType stateType)
 {
-	switch (stateId)
+	switch (stateType)
 	{
-		case StateId::gameState:
+		case StateType::gameState:
 			states.emplace(std::make_unique<GameState>());
 			checkState();
 			break;	

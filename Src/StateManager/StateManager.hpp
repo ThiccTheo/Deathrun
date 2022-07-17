@@ -7,7 +7,7 @@
 #include "CommonSFML.hpp"
 #include "CommonImGui.hpp"
 
-enum class StateId { gameState, count };
+enum class StateType { gameState, count };
 
 class StateManager
 {
@@ -19,7 +19,7 @@ public:
 	virtual void update(const float deltaTime, const sf::Event& e);
 	virtual void draw();
 	static const sf::Event eventHandler();
-	static void addState(const StateId stateId);
+	static void addState(const StateType stateType);
 	static bool removeState();
 private:
 	static std::stack<std::unique_ptr<StateManager>> states;

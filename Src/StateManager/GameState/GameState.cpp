@@ -1,5 +1,6 @@
 #include "GameState.hpp"
 #include "../../Scene/Scene.hpp"
+#include "../../ResourceManager/ResourceManager.hpp"
 #include "../../Entity/Player/Player.hpp"
 #include "../../Entity/Particle/Particle.hpp"
 #include "../../Entity/Tile/Tile.hpp"
@@ -8,17 +9,9 @@ GameState::GameState()
 {
 	camera.setSize(sf::Vector2f(Scene::window.getSize()));
 	camera.zoom(0.5f);
+	level = 1;
 
-	Player player(sf::Vector2i(10, 10));
-	Player::player = player;
-
-	for (int i = 0; i < 100; i++)
-	{
-		for (int j = 0; j < 100; j++)
-		{
-			Tile::tiles.emplace_back(sf::Vector2i(j, i));
-		}
-	}
+	loadLevel();
 }
 
 GameState::~GameState() = default;
@@ -57,4 +50,27 @@ void GameState::draw()
 	Tile::draw();
 	Particle::draw();
 	Player::draw();
+}
+
+void GameState::loadLevel()
+{
+	const sf::Image& level{ ResourceManager::imageMap[ImageId::level1] };
+
+	for (unsigned int y{ 0 }; y < level.getSize().y; y++)
+	{
+		for (unsigned int x{ 0 }; x < level.getSize().x; x++)
+		{
+			const sf::Color& color{ level.getPixel(x, y) };
+
+			if (color == sf::Color(0, 0, 0))
+			{
+				Tile::tiles.emplace_back(sf::Vector2i(x, y));
+			}
+			else if (color == sf::Color(255, 0, 0))
+			{
+				Player player(sf::Vector2i(x, y));
+				Player::player = player;
+			}
+		}
+	}
 }
