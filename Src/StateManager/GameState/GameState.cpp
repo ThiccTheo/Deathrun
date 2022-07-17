@@ -42,6 +42,8 @@ void GameState::run()
 
 void GameState::update(const float deltaTime, const sf::Event& e)
 {
+	Logger::debug("bruh");
+
 	Tile::update(deltaTime);
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);
