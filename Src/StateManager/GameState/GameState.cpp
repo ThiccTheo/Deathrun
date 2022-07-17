@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "GameState.hpp"
 #include "../../Scene/Scene.hpp"
 #include "../../ResourceManager/ResourceManager.hpp"
@@ -42,7 +44,11 @@ void GameState::update(const float deltaTime, const sf::Event& e)
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);
 
-	camera.setCenter(Player::player.body.getPosition());
+	camera.setCenter
+	(
+		std::lerp(camera.getCenter().x, Player::player.body.getPosition().x, deltaTime),
+		std::lerp(camera.getCenter().y, Player::player.body.getPosition().y, deltaTime)
+	);
 }
 
 void GameState::draw()
@@ -70,6 +76,7 @@ void GameState::loadLevel()
 			{
 				Player player(sf::Vector2i(x, y));
 				Player::player = player;
+				camera.setCenter(Player::player.body.getPosition());
 			}
 		}
 	}
