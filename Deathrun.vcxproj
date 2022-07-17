@@ -160,6 +160,7 @@
     <ClCompile Include="Src\StateManager\GameState\GameState.cpp" />
     <ClCompile Include="Src\StateManager\StateManager.cpp" />
     <ClCompile Include="Src\Entity\Tile\Tile.cpp" />
+    <ClCompile Include="Tools\Logger\Logger.cpp" />
     <ClCompile Include="Tools\PerlinNoise\PerlinNoise.cpp" />
     <ClCompile Include="Tools\ScopedTimer\ScopedTimer.cpp" />
   </ItemGroup>
