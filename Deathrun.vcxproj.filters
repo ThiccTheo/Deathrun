@@ -54,6 +54,12 @@
     <ClCompile Include="Include\ImGui\imgui-SFML.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tools\PerlinNoise\PerlinNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\ScopedTimer\ScopedTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Entity\Particle\Particle.hpp">
@@ -393,6 +399,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Include\CommonSFML.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\PerlinNoise\PerlinNoise.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tools\ScopedTimer\ScopedTimer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
