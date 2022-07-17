@@ -25,6 +25,8 @@ void GameState::run()
 	sf::Clock deltaClock;
 	float deltaTime;
 
+	Logger::error("get out of here!");
+
 	while (Scene::window.isOpen())
 	{
 		const sf::Event& e{ eventHandler() };
@@ -42,8 +44,6 @@ void GameState::run()
 
 void GameState::update(const float deltaTime, const sf::Event& e)
 {
-	Logger::debug("bruh");
-
 	Tile::update(deltaTime);
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);
