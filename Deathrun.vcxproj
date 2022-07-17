@@ -289,6 +289,7 @@
     <None Include="Include\SFML\System\Utf.inl" />
     <None Include="Include\SFML\System\Vector2.inl" />
     <None Include="Include\SFML\System\Vector3.inl" />
+    <None Include="Tools\RangeRandom\RangeRandom.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -436,5 +436,8 @@
     <None Include="Include\SFML\System\Vector3.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="Tools\RangeRandom\RangeRandom.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

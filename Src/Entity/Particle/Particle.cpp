@@ -3,6 +3,7 @@
 
 #include "Particle.hpp"
 #include "../../Scene/Scene.hpp"
+#include "../../../Tools/RangeRandom/RangeRandom.inl"
 
 std::vector<Particle> Particle::particles;
 sf::VertexArray Particle::vertexArray;
@@ -10,7 +11,7 @@ sf::VertexArray Particle::vertexArray;
 Particle::Particle(const sf::Vector2i& indices) 
 	: Entity{ indices, sf::Vector2f(4.f, 4.f) }
 {
-	angle = static_cast<float>(rand() % (30 - -30 + 1) + -30);
+	angle = static_cast<float>(rangeRandom(-30, 30));
 	lifetime = sf::seconds(10);
 	spawnColor = sf::Color(255, 0, 0, 255);
 	color = spawnColor;
