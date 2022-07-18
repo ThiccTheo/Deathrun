@@ -7,7 +7,7 @@
 #include "CommonSFML.hpp"
 #include "CommonImGui.hpp"
 
-enum class StateType { gameState, count };
+enum class StateType { gameState, menuState, count };
 
 class StateManager
 {

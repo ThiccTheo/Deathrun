@@ -151,6 +151,7 @@
     <ClCompile Include="Include\ImGui\imgui_draw.cpp" />
     <ClCompile Include="Include\ImGui\imgui_tables.cpp" />
     <ClCompile Include="Include\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Src\StateManager\MenuState\MenuState.cpp" />
     <ClCompile Include="Src\Entity\Entity.cpp" />
     <ClCompile Include="Src\Entity\Particle\Particle.cpp" />
     <ClCompile Include="Src\Entity\Player\Player.cpp" />
@@ -271,6 +272,7 @@
     <ClInclude Include="Include\SFML\Window\Window.hpp" />
     <ClInclude Include="Include\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="Include\SFML\Window\WindowStyle.hpp" />
+    <ClInclude Include="Src\StateManager\MenuState\MenuState.hpp" />
     <ClInclude Include="Src\Entity\Entity.hpp" />
     <ClInclude Include="Src\Entity\Particle\Particle.hpp" />
     <ClInclude Include="Src\Entity\Player\Player.hpp" />
