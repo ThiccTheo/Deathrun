@@ -12,7 +12,7 @@ sf::VertexArray Particle::vertexArray;
 Particle::Particle(const sf::Vector2i& indices) 
 	: Entity{ indices, sf::Vector2f(4.f, 4.f) }
 {
-	angle = rangeRandom(-30.f, 30.f);
+	angle = rangeRandom(-60.f, 60.f);
 	spawnColor = sf::Color(200, 0, 0, 255);
 	color = spawnColor;
 	deathColor = sf::Color(0, 0, 255, 0);

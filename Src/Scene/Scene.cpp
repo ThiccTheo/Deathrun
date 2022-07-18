@@ -8,7 +8,7 @@ bool Scene::isFocused;
 void Scene::init()
 {
 	const auto& [width, height] {determineResolution()};
-	window.create(sf::VideoMode(width, height), "Platformer", sf::Style::Default);
+	window.create(sf::VideoMode(width, height), "Deathrun", sf::Style::Default);
 	isFocused = true;
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(false);

@@ -14,5 +14,6 @@ public:
 	void run() override;
 	void update(const float deltaTime, const sf::Event& e) override;
 	void draw() override;
+private:
 };
 
