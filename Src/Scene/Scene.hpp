@@ -9,11 +9,13 @@ class Scene
 {
 public:
 	static sf::RenderWindow window;
-	static sf::Cursor cursor;
 	static bool isFocused;
+	static bool isVsync;
 
 	static void init();
 private:
+	static sf::Cursor cursor;
+
 	static const sf::Vector2u determineResolution();
 };
 

@@ -69,6 +69,9 @@
     <ClCompile Include="Src\StateManager\MenuState\MenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Src\StateManager\SettingsState\SettingsState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Entity\Particle\Particle.hpp">
@@ -420,6 +423,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Src\StateManager\MenuState\MenuState.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\StateManager\SettingsState\SettingsState.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

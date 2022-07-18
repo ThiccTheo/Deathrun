@@ -1,15 +1,17 @@
-#include "MenuState.hpp"
+#include "SettingsState.hpp"
 #include "../../Scene/Scene.hpp"
 
-MenuState::MenuState()
+SettingsState::SettingsState()
 {
 	camera.setSize(sf::Vector2f(Scene::window.getSize()));
 	isPopped = false;
 }
 
-MenuState::~MenuState() = default;
+SettingsState::~SettingsState()
+{
+}
 
-void MenuState::run()
+void SettingsState::run()
 {
 	sf::Clock deltaClock;
 	float deltaTime;
@@ -29,7 +31,7 @@ void MenuState::run()
 	}
 }
 
-void MenuState::update(const float deltaTime, const sf::Event& e)
+void SettingsState::update(const float deltaTime, const sf::Event& e)
 {
 	ImGui::SFML::ProcessEvent(e);
 
@@ -46,20 +48,16 @@ void MenuState::update(const float deltaTime, const sf::Event& e)
 	ImGui::SFML::Update(Scene::window, sf::seconds(deltaTime));
 }
 
-void MenuState::draw()
+void SettingsState::draw()
 {
 	ImGui::SetNextWindowSize(ImVec2(300.f, 350.f));
 	ImGui::SetNextWindowPos(ImVec2(Scene::window.getSize().x / 2.f - 150.f, Scene::window.getSize().y / 2.f - 175.f));
-	ImGui::Begin("Main Menu");
-	if (ImGui::Button("Play Game", ImVec2(300.f, 100.f)))
+	ImGui::Begin("Settings");
+	if (ImGui::Checkbox("V-Sync", &Scene::isVsync))
 	{
-		addState(StateType::gameState);
+		Scene::window.setVerticalSyncEnabled(Scene::isVsync);
 	}
-	if (ImGui::Button("Settings", ImVec2(300.f, 100.f)))
-	{
-		addState(StateType::settingsState);
-	}
-	if (ImGui::Button("Quit", ImVec2(300.f, 100.f)))
+	if (ImGui::Button("Back", ImVec2(300.f, 100.f)))
 	{
 		isPopped = removeState();
 	}

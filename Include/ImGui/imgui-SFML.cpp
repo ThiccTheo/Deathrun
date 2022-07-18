@@ -1387,7 +1387,7 @@ void loadMouseCursor(ImGuiMouseCursor imguiCursorType, sf::Cursor::Type sfmlCurs
 }
 
 void updateMouseCursor(sf::Window& window) {
-    ImGuiIO& io = ImGui::GetIO();
+    /*ImGuiIO& io = ImGui::GetIO();
     if ((io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange) == 0) {
         ImGuiMouseCursor cursor = ImGui::GetMouseCursor();
         if (io.MouseDrawCursor || cursor == ImGuiMouseCursor_None) {
@@ -1400,7 +1400,7 @@ void updateMouseCursor(sf::Window& window) {
                                 s_currWindowCtx->mouseCursors[ImGuiMouseCursor_Arrow];
             window.setMouseCursor(c);
         }
-    }
+    }*/
 }
 
 } // end of anonymous namespace

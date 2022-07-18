@@ -2,6 +2,7 @@
 #include "../Scene/Scene.hpp"
 #include "GameState/GameState.hpp"
 #include "MenuState/MenuState.hpp"
+#include "SettingsState/SettingsState.hpp"
 
 std::stack<std::unique_ptr<StateManager>> StateManager::states;
 
@@ -47,6 +48,10 @@ void StateManager::addState(const StateType stateType)
 			break;	
 		case StateType::menuState:
 			states.emplace(std::make_unique<MenuState>());
+			checkState();
+			break;
+		case StateType::settingsState:
+			states.emplace(std::make_unique<SettingsState>());
 			checkState();
 			break;
 	}

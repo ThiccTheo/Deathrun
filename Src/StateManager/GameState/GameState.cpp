@@ -14,6 +14,7 @@ GameState::GameState()
 	camera.setSize(sf::Vector2f(Scene::window.getSize()));
 	camera.zoom(0.5f);
 	level = 1;
+	isPopped = false;
 
 	loadLevel();
 }
@@ -25,7 +26,7 @@ void GameState::run()
 	sf::Clock deltaClock;
 	float deltaTime;
 
-	while (Scene::window.isOpen())
+	while (Scene::window.isOpen() && !isPopped)
 	{
 		const sf::Event& e{ eventHandler() };
 
@@ -42,6 +43,16 @@ void GameState::run()
 
 void GameState::update(const float deltaTime, const sf::Event& e)
 {
+	switch (e.type)
+	{
+	case sf::Event::KeyPressed:
+		if (e.key.code == sf::Keyboard::Escape)
+		{
+			addState(StateType::settingsState);
+		}
+		break;
+	}
+
 	Tile::update(deltaTime);
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);

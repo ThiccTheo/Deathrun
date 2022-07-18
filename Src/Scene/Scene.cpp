@@ -4,13 +4,15 @@
 sf::RenderWindow Scene::window;
 sf::Cursor Scene::cursor;
 bool Scene::isFocused;
+bool Scene::isVsync;
 
 void Scene::init()
 {
 	const auto& [width, height] {determineResolution()};
 	window.create(sf::VideoMode(width, height), "Deathrun", sf::Style::Default);
 	isFocused = true;
-	window.setVerticalSyncEnabled(true);
+	isVsync = true;
+	window.setVerticalSyncEnabled(isVsync);
 	window.setKeyRepeatEnabled(false);
 
 	cursor.loadFromPixels(ResourceManager::imageMap[ImageId::cursor].getPixelsPtr(), sf::Vector2u(10, 10), sf::Vector2u(0, 0));

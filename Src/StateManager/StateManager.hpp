@@ -7,12 +7,13 @@
 #include "CommonSFML.hpp"
 #include "CommonImGui.hpp"
 
-enum class StateType { gameState, menuState, count };
+enum class StateType { gameState, menuState, settingsState, count };
 
 class StateManager
 {
 public:
 	sf::View camera;
+	bool isPopped;
 
 	virtual ~StateManager();
 	virtual void run();
