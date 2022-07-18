@@ -14,7 +14,7 @@ SettingsState::~SettingsState()
 void SettingsState::run()
 {
 	sf::Clock deltaClock;
-	float deltaTime;
+	float deltaTime{};
 
 	while (Scene::window.isOpen() && !isPopped)
 	{

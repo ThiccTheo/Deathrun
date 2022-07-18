@@ -12,7 +12,7 @@ MenuState::~MenuState() = default;
 void MenuState::run()
 {
 	sf::Clock deltaClock;
-	float deltaTime;
+	float deltaTime{};
 
 	while (Scene::window.isOpen() && !isPopped)
 	{

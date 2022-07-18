@@ -24,7 +24,7 @@ GameState::~GameState() = default;
 void GameState::run()
 {
 	sf::Clock deltaClock;
-	float deltaTime;
+	float deltaTime{};
 
 	while (Scene::window.isOpen() && !isPopped)
 	{
@@ -75,9 +75,9 @@ void GameState::loadLevel()
 {
 	const sf::Image& level{ ResourceManager::imageMap[ImageId::level1] };
 
-	for (unsigned int y{ 0 }; y < level.getSize().y; y++)
+	for (unsigned int y{}; y < level.getSize().y; y++)
 	{
-		for (unsigned int x{ 0 }; x < level.getSize().x; x++)
+		for (unsigned int x{}; x < level.getSize().x; x++)
 		{
 			const sf::Color& color{ level.getPixel(x, y) };
 
