@@ -3,15 +3,15 @@
 FmtString::FmtString() = default;
 
 FmtString::FmtString(const char* message, const std::source_location& location)
+	: message{ message },
+	location{ location }
 {
-	this->message = message;
-	this->location = location;
 }
 
 FmtString::FmtString(const std::string& message, const std::source_location& location)
+	: message{ message },
+	location{ location }
 {
-	this->message = message;
-	this->location = location;
 }
 
 void Logger::print(const LogLevel logLevel, std::string message, const std::source_location& location)

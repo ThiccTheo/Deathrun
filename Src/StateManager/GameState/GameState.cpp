@@ -10,19 +10,18 @@
 #include "../../Entity/Tile/Tile.hpp"
 
 GameState::GameState()
+	: StateManager{},
+	level{ 1 }
 {
-	camera.setSize(sf::Vector2f(Scene::window.getSize()));
 	camera.zoom(0.5f);
-	level = 1;
-	isPopped = false;
-
-	loadLevel();
 }
 
 GameState::~GameState() = default;
 
 void GameState::run()
 {
+	loadLevel();
+
 	sf::Clock deltaClock;
 	float deltaTime{};
 
@@ -34,7 +33,7 @@ void GameState::run()
 		update(deltaTime, e);
 
 		Scene::window.setView(camera);
-		Scene::window.clear(sf::Color(82, 146, 219));
+		Scene::window.clear(sf::Color{ 82, 146, 219 });
 
 		draw();
 		Scene::window.display();
@@ -75,19 +74,19 @@ void GameState::loadLevel()
 {
 	const sf::Image& level{ ResourceManager::imageMap[ImageId::level1] };
 
-	for (unsigned int y{}; y < level.getSize().y; y++)
+	for (unsigned int y{}; y < level.getSize().y; ++y)
 	{
-		for (unsigned int x{}; x < level.getSize().x; x++)
+		for (unsigned int x{}; x < level.getSize().x; ++x)
 		{
 			const sf::Color& color{ level.getPixel(x, y) };
 
-			if (color == sf::Color(0, 0, 0))
+			if (color == sf::Color{ 0, 0, 0 })
 			{
-				Tile::tiles.emplace_back(sf::Vector2i(x, y));
+				Tile::tiles.emplace_back(sf::Vector2i{ x, y });
 			}
-			else if (color == sf::Color(255, 0, 0))
+			else if (color == sf::Color{ 255, 0, 0 })
 			{
-				Player player(sf::Vector2i(x, y));
+				Player player{ sf::Vector2i{ x, y } };
 				Player::player = player;
 				camera.setCenter(Player::player.body.getPosition());
 			}

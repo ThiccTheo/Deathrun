@@ -6,6 +6,12 @@
 
 std::stack<std::unique_ptr<StateManager>> StateManager::states;
 
+StateManager::StateManager()
+	: isPopped{ false }
+{
+	camera.setSize(sf::Vector2f{ Scene::window.getSize() });
+}
+
 StateManager::~StateManager() = default;
 
 void StateManager::run() {}

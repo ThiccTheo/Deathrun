@@ -11,14 +11,14 @@ sf::VertexArray Player::vertexArray;
 Player::Player() = default;
 
 Player::Player(const sf::Vector2i& indices)
-	: Entity{ indices, sf::Vector2f(16.f, 16.f) } 
+	: Entity{ indices, sf::Vector2f{ 16.f, 16.f } },
+	velocity{ 0.f, 0.f },
+	isGrounded{ false },
+	terminalVelocity{ 100.f, 1000.f },
+	gravity{ 100.f },
+	friction{ 12.f },
+	movementOffset{ 50.f, 100.f }
 {
-	velocity = sf::Vector2f(0.f, 0.f);
-	isGrounded = false;
-	terminalVelocity = sf::Vector2f(100.f, 1000.f);
-	gravity = 100.f;
-	friction = 12.f;
-	movementOffset = sf::Vector2f(50.f, 100.f);
 };
 
 Player::~Player() = default;
@@ -109,9 +109,6 @@ void Player::update(const float deltaTime, const sf::Event& e)
 	{
 		player.isGrounded = false;
 	}
-
-	if(player.velocity.x != 0.f || player.velocity.y != 0.f)
-	Particle::particles.emplace_back(sf::Vector2i(static_cast<int>(player.body.getPosition().x / 4.f), static_cast<int>(player.body.getPosition().y / 4.f)));
 }
 
 void Player::draw()
@@ -119,16 +116,16 @@ void Player::draw()
 	vertexArray.setPrimitiveType(sf::Quads);
 	vertexArray.resize(4);
 
-	int vertexPtr{ 0 };
+	int vertexPtr{};
 
 	player.transform = player.body.getTransform();
 	sf::Vertex* quad{ &vertexArray[vertexPtr] };
 
-	for (int i{ 0 }; i < 4; i++)
+	for (int i{}; i < 4; ++i)
 	{
 		player.mesh[i] = player.body.getPoint(i);
 		quad[i] = player.transform.transformPoint(player.mesh[i]);
-		quad[i].texCoords = sf::Vector2f(player.mesh[i].x, player.mesh[i].y);
+		quad[i].texCoords = player.mesh[i];
 	}
 
 	vertexPtr += 4;

@@ -19,7 +19,6 @@ private:
 	static sf::VertexArray vertexArray;
 	sf::Clock timer;
 	sf::Color color;
-	sf::Color spawnColor;
 	sf::Color deathColor;
 	float angle;
 	sf::Time maxLifetime;

@@ -2,9 +2,8 @@
 #include "../../Scene/Scene.hpp"
 
 MenuState::MenuState()
+	: StateManager{}
 {
-	camera.setSize(sf::Vector2f(Scene::window.getSize()));
-	isPopped = false;
 }
 
 MenuState::~MenuState() = default;
@@ -48,18 +47,18 @@ void MenuState::update(const float deltaTime, const sf::Event& e)
 
 void MenuState::draw()
 {
-	ImGui::SetNextWindowSize(ImVec2(300.f, 350.f));
-	ImGui::SetNextWindowPos(ImVec2(Scene::window.getSize().x / 2.f - 150.f, Scene::window.getSize().y / 2.f - 175.f));
+	ImGui::SetNextWindowSize(ImVec2{ 300.f, 350.f });
+	ImGui::SetNextWindowPos(ImVec2{ Scene::window.getSize().x / 2.f - 150.f, Scene::window.getSize().y / 2.f - 175.f });
 	ImGui::Begin("Main Menu");
-	if (ImGui::Button("Play Game", ImVec2(300.f, 100.f)))
+	if (ImGui::Button("Play Game", ImVec2{ 300.f, 100.f }))
 	{
 		addState(StateType::gameState);
 	}
-	if (ImGui::Button("Settings", ImVec2(300.f, 100.f)))
+	if (ImGui::Button("Settings", ImVec2{ 300.f, 100.f }))
 	{
 		addState(StateType::settingsState);
 	}
-	if (ImGui::Button("Quit", ImVec2(300.f, 100.f)))
+	if (ImGui::Button("Quit", ImVec2{ 300.f, 100.f }))
 	{
 		isPopped = removeState();
 	}

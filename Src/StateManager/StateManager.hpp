@@ -15,6 +15,7 @@ public:
 	sf::View camera;
 	bool isPopped;
 
+	StateManager();
 	virtual ~StateManager();
 	virtual void run();
 	virtual void update(const float deltaTime, const sf::Event& e);
