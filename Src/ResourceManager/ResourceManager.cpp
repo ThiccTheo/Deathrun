@@ -12,5 +12,5 @@ const bool ResourceManager::load()
 		textureMap[TextureId::tile].loadFromFile("Data/Textures/Tile.png") &&
 
 		imageMap[ImageId::cursor].loadFromFile("Data/Images/Cursor.png") &&
-		imageMap[ImageId::level1].loadFromFile("Data/Images/Level1.png");
+		imageMap[ImageId::level].loadFromFile("Data/Images/Level.png");
 }

@@ -14,10 +14,10 @@ Player::Player(const sf::Vector2i& indices)
 	: Entity{ indices, sf::Vector2f{ 16.f, 16.f } },
 	velocity{ 0.f, 0.f },
 	isGrounded{ false },
-	terminalVelocity{ 100.f, 1000.f },
-	gravity{ 100.f },
-	friction{ 12.f },
-	movementOffset{ 50.f, 100.f }
+	terminalVelocity{ 75.f, 1000.f },
+	gravity{ 180.f },
+	friction{ 6.f },
+	movementOffset{ 50.f, 150.f }
 {
 };
 
@@ -109,6 +109,9 @@ void Player::update(const float deltaTime, const sf::Event& e)
 	{
 		player.isGrounded = false;
 	}
+
+	if(!(player.velocity.x == 0.f && player.velocity.y == 0.f))
+	Particle::particles.emplace_back(sf::Vector2i{ player.body.getPosition() / 6.f });
 }
 
 void Player::draw()

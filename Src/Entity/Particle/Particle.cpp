@@ -10,11 +10,13 @@ std::vector<Particle> Particle::particles;
 sf::VertexArray Particle::vertexArray;
 
 Particle::Particle(const sf::Vector2i& indices)
-	: Entity{ indices, sf::Vector2f{ 4.f, 4.f } },
-	angle{ rangeRandom(-60.f, 60.f) },
-	color{ 0, 0, 0, 255 },
-	deathColor{ 255, 0, 0, 0 },
-	maxLifetime{ sf::seconds(1.5f) }
+	: Entity{ indices, sf::Vector2f{ 6.f, 6.f } },
+	angle{ rangeRandom(-360.f, 360.f) },
+	deathColor{ 0, 0, 0, 0 },
+	spawnColor{ 255, 0, 0, 255 },
+	color{ spawnColor },
+	maxLifetime{ sf::seconds(0.3f) },
+	timer{}
 {
 }
 
@@ -24,14 +26,17 @@ void Particle::update(const float deltaTime)
 {
 	for (Particle& particle : particles)
 	{
-		particle.color.r = static_cast<int>(std::lerp(static_cast<float>(particle.color.r), static_cast<float>(particle.deathColor.r),  particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
-		particle.color.g = static_cast<int>(std::lerp(static_cast<float>(particle.color.g), static_cast<float>(particle.deathColor.g), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
-		particle.color.b = static_cast<int>(std::lerp(static_cast<float>(particle.color.b), static_cast<float>(particle.deathColor.b), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
-		particle.color.a = static_cast<int>(std::lerp(static_cast<float>(particle.color.a), static_cast<float>(particle.deathColor.a), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
-		//particle.color.a = static_cast<int>(particle.spawnColor.a * (particle.lifetime.asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.r = static_cast<int>(std::lerp(static_cast<float>(particle.spawnColor.r), static_cast<float>(particle.deathColor.r), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.g = static_cast<int>(std::lerp(static_cast<float>(particle.spawnColor.g), static_cast<float>(particle.deathColor.g), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.b = static_cast<int>(std::lerp(static_cast<float>(particle.spawnColor.b), static_cast<float>(particle.deathColor.b), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
+		particle.color.a = static_cast<int>(std::lerp(static_cast<float>(particle.spawnColor.a), static_cast<float>(particle.deathColor.a), particle.timer.getElapsedTime().asSeconds() / particle.maxLifetime.asSeconds()));
 		particle.body.rotate(particle.angle * deltaTime);
 		particle.body.setSize(sf::Vector2f{ particle.body.getSize().x + 0.5f, particle.body.getSize().y + 0.5f });
-		particle.body.setOrigin(particle.body.getSize().x / 2.f, particle.body.getSize().x / 2.f);
+		if (particle.body.getSize().x > 10.f)
+		{
+			particle.body.setSize(sf::Vector2f{ 10.f, 10.f });
+		}
+		particle.body.setOrigin(particle.body.getSize() / 2.f);
 	}
 
 	std::erase_if(particles,

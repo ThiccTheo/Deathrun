@@ -11,7 +11,8 @@
 
 GameState::GameState()
 	: StateManager{},
-	level{ 1 }
+	level{ 1 },
+	levelSize{}
 {
 	camera.zoom(0.5f);
 }
@@ -56,10 +57,13 @@ void GameState::update(const float deltaTime, const sf::Event& e)
 	Particle::update(deltaTime);
 	Player::update(deltaTime, e);
 
+	const auto& [playerX, playerY] { Player::player.body.getPosition() };
+	const auto& [cameraX, cameraY] { camera.getCenter() };
+
 	camera.setCenter
 	(
-		std::lerp(camera.getCenter().x, Player::player.body.getPosition().x, 5 * deltaTime),
-		std::lerp(camera.getCenter().y, Player::player.body.getPosition().y, 5 * deltaTime)
+		std::clamp(std::lerp(cameraX, playerX, 10.f * deltaTime), camera.getSize().x / 2.f - 8.f, levelSize.x * 16.f - camera.getSize().x / 2.f - 8.f), //test values
+		std::clamp(std::lerp(cameraY, playerY, 10.f * deltaTime), 0.f, levelSize.y * 16.f - camera.getSize().y / 2.f - 8.f)  //test values
 	);
 }
 
@@ -72,21 +76,22 @@ void GameState::draw()
 
 void GameState::loadLevel()
 {
-	const sf::Image& level{ ResourceManager::imageMap[ImageId::level1] };
+	const sf::Image& level{ ResourceManager::imageMap[ImageId::level] };
+	levelSize = level.getSize();
 
-	for (unsigned int y{}; y < level.getSize().y; ++y)
+	for (unsigned int y{}; y < levelSize.y; ++y)
 	{
-		for (unsigned int x{}; x < level.getSize().x; ++x)
+		for (unsigned int x{}; x < levelSize.x; ++x)
 		{
 			const sf::Color& color{ level.getPixel(x, y) };
 
 			if (color == sf::Color{ 0, 0, 0 })
 			{
-				Tile::tiles.emplace_back(sf::Vector2i{ x, y });
+				Tile::tiles.emplace_back(sf::Vector2i{ static_cast<int>(x), static_cast<int>(y) });
 			}
 			else if (color == sf::Color{ 255, 0, 0 })
 			{
-				Player player{ sf::Vector2i{ x, y } };
+				Player player{ sf::Vector2i{ static_cast<int>(x), static_cast<int>(y) } };
 				Player::player = player;
 				camera.setCenter(Player::player.body.getPosition());
 			}

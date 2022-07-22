@@ -16,6 +16,7 @@ public:
 	void draw() override;
 private:
 	int level;
+	sf::Vector2u levelSize;
 
 	void loadLevel();
 };
