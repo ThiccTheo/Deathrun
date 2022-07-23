@@ -11,7 +11,7 @@ sf::VertexArray Player::vertexArray;
 Player::Player() = default;
 
 Player::Player(const sf::Vector2i& indices)
-	: Entity{ indices, sf::Vector2f{ 16.f, 16.f } },
+	: Entity{ indices, sizeMap[EntityType::player] },
 	velocity{ 0.f, 0.f },
 	isGrounded{ false },
 	terminalVelocity{ 75.f, 1000.f },

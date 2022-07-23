@@ -3,6 +3,8 @@
 #include "Particle/Particle.hpp"
 #include "Tile/Tile.hpp"
 
+std::unordered_map<EntityType, sf::Vector2f> Entity::sizeMap;
+
 Entity::Entity() = default;
 
 Entity::Entity(const sf::Vector2i& indices, const sf::Vector2f& bodySize)
@@ -13,6 +15,13 @@ Entity::Entity(const sf::Vector2i& indices, const sf::Vector2f& bodySize)
 }
 
 Entity::~Entity() = default;
+
+void Entity::init()
+{
+	sizeMap[EntityType::particle] = sf::Vector2f{ 6.f, 6.f };
+	sizeMap[EntityType::player] = sf::Vector2f{ 16.f, 16.f };
+	sizeMap[EntityType::tile] = sf::Vector2f{ 16.f, 16.f };
+}
 
 const Entity* Entity::collisionHandler(const EntityType entityType)
 {

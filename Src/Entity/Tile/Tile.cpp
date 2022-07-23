@@ -7,7 +7,7 @@ std::vector<Tile> Tile::tiles;
 sf::VertexArray Tile::vertexArray;
 
 Tile::Tile(const sf::Vector2i& indices)
-	: Entity{ indices, sf::Vector2f{ 16.f, 16.f } }
+	: Entity{ indices, sizeMap[EntityType::tile] }
 {
 }
 

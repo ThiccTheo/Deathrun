@@ -5,6 +5,7 @@
 #include "../../ResourceManager/ResourceManager.hpp"
 #include "../../../Tools/ScopedTimer/ScopedTimer.hpp"
 #include "../../../Tools/Logger/Logger.hpp"
+#include "../../Entity/Entity.hpp"
 #include "../../Entity/Player/Player.hpp"
 #include "../../Entity/Particle/Particle.hpp"
 #include "../../Entity/Tile/Tile.hpp"
@@ -62,8 +63,8 @@ void GameState::update(const float deltaTime, const sf::Event& e)
 
 	camera.setCenter
 	(
-		std::clamp(std::lerp(cameraX, playerX, 10.f * deltaTime), camera.getSize().x / 2.f - 8.f, levelSize.x * 16.f - camera.getSize().x / 2.f - 8.f), //test values
-		std::clamp(std::lerp(cameraY, playerY, 10.f * deltaTime), 0.f, levelSize.y * 16.f - camera.getSize().y / 2.f - 8.f)  //test values
+		std::clamp(std::lerp(cameraX, playerX, 10.f * deltaTime), camera.getSize().x / 2.f - Entity::sizeMap[EntityType::tile].x / 2.f, levelSize.x * Entity::sizeMap[EntityType::tile].x - camera.getSize().x / 2.f - Entity::sizeMap[EntityType::tile].x / 2.f), //test values
+		std::clamp(std::lerp(cameraY, playerY, 10.f * deltaTime), 0.f, levelSize.y * Entity::sizeMap[EntityType::tile].y - camera.getSize().y / 2.f - Entity::sizeMap[EntityType::tile].y / 2.f)  //test values
 	);
 }
 

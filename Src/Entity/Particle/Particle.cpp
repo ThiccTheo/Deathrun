@@ -10,7 +10,7 @@ std::vector<Particle> Particle::particles;
 sf::VertexArray Particle::vertexArray;
 
 Particle::Particle(const sf::Vector2i& indices)
-	: Entity{ indices, sf::Vector2f{ 6.f, 6.f } },
+	: Entity{ indices, sizeMap[EntityType::particle] },
 	angle{ rangeRandom(-360.f, 360.f) },
 	deathColor{ 0, 0, 0, 0 },
 	spawnColor{ 255, 0, 0, 255 },
