@@ -11,7 +11,8 @@ Entity::Entity(const sf::Vector2i& indices, const sf::Vector2f& bodySize)
 	: body{ bodySize }
 {
 	body.setOrigin(bodySize / 2.f);
-	body.setPosition(indices.x * bodySize.x, indices.y * bodySize.y);
+	//body.setPosition(indices.x * sizeMap[EntityType::tile].x, indices.y * sizeMap[EntityType::tile].y);
+	body.setPosition(bodySize.x * indices.x, bodySize.y * indices.y);
 }
 
 Entity::~Entity() = default;

@@ -6,8 +6,9 @@
 std::vector<Tile> Tile::tiles;
 sf::VertexArray Tile::vertexArray;
 
-Tile::Tile(const sf::Vector2i& indices)
-	: Entity{ indices, sizeMap[EntityType::tile] }
+Tile::Tile(const sf::Vector2i& indices, const TileType type)
+	: Entity{ indices, sizeMap[EntityType::tile] },
+	type{ type }
 {
 }
 
@@ -33,7 +34,7 @@ void Tile::draw()
 		{
 			tile.mesh[i] = tile.body.getPoint(i);
 			quad[i] = tile.transform.transformPoint(tile.mesh[i]);
-			quad[i].texCoords = tile.mesh[i];
+			quad[i].texCoords = sf::Vector2f{ tile.mesh[i].x, tile.mesh[i].y};
 		}
 
 		vertexPtr += 4;

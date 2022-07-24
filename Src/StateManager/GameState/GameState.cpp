@@ -35,7 +35,7 @@ void GameState::run()
 		update(deltaTime, e);
 
 		Scene::window.setView(camera);
-		Scene::window.clear(sf::Color{ 82, 146, 219 });
+		Scene::window.clear(sf::Color{ 135, 206, 235 });
 
 		draw();
 		Scene::window.display();
@@ -88,7 +88,7 @@ void GameState::loadLevel()
 
 			if (color == sf::Color{ 0, 0, 0 })
 			{
-				Tile::tiles.emplace_back(sf::Vector2i{ static_cast<int>(x), static_cast<int>(y) });
+				Tile::tiles.emplace_back(sf::Vector2i{ static_cast<int>(x), static_cast<int>(y) }, TileType::grass);
 			}
 			else if (color == sf::Color{ 255, 0, 0 })
 			{
