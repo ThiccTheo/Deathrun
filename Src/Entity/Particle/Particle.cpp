@@ -13,7 +13,7 @@ Particle::Particle(const sf::Vector2i& indices)
 	: Entity{ indices, sizeMap[EntityType::particle] },
 	angle{ rangeRandom(-360.f, 360.f) },
 	deathColor{ 0, 0, 0, 0 },
-	spawnColor{ 255, 0, 0, 255 },
+	spawnColor{ 255, 200, 0, 255 },
 	color{ spawnColor },
 	maxLifetime{ sf::seconds(0.3f) },
 	timer{}
